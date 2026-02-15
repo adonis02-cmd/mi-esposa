@@ -143,16 +143,27 @@ function iniciarRegalo() {
 
 function createTextBubble() {
     const container = document.getElementById("bubbles-text");
+    if (!container) return;
+
     const bubble = document.createElement("div");
     bubble.className = "text-bubble";
-    bubble.innerText = messages[Math.floor(Math.random() * messages.length)];
     
-    // Posición aleatoria por toda la pantalla
-    bubble.style.left = (Math.random() * 60 + 5) + "vw";
-    bubble.style.top = (Math.random() * 70 + 5) + "vh";
+    // Añadimos un corazoncito al final de cada frase automáticamente
+    const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+    bubble.innerText = randomMsg + " ❤️";
+    
+    // Posiciones aleatorias esparcidas (lejos de los bordes para que no se corten)
+    const randomX = Math.floor(Math.random() * 65) + 5; // de 5% a 70%
+    const randomY = Math.floor(Math.random() * 75) + 10; // de 10% a 85%
+
+    bubble.style.left = randomX + "vw";
+    bubble.style.top = randomY + "vh";
 
     container.appendChild(bubble);
-    setTimeout(() => bubble.remove(), 9000);
+
+    setTimeout(() => {
+        bubble.remove();
+    }, 8500);
 }
 
 function cambiarImagen() {
