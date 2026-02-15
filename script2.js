@@ -27,10 +27,10 @@ function onYouTubeIframeAPIReady() {
 
 function checkPassword() {
     const input = document.getElementById("password-input").value;
-    const loginScreen = document.getElementById("login-screen");
-    const mainContent = document.getElementById("main-content");
-    const errorMsg = document.getElementById("error-msg");
-
+    if (input === secretWord) {
+        document.getElementById("step-1").style.display = "none";
+        document.getElementById("step-2").style.display = "block"; 
+    
     if (input === secretWord) {
     	if (player) {
         	player.unMute();
@@ -45,8 +45,59 @@ function checkPassword() {
             iniciarRegalo();
         }, 500);
     } else {
-        errorMsg.style.display = "block";
+        document.getElementById("error-msg").style.display = "block";
     }
+}
+
+function checkName() {
+    const nameInput = document.getElementById("name-input").value.trim();
+    if (nameInput.toLowerCase() === "jermelyn") {
+        showHeart();
+    } else {
+        alert("Please enter your name correctly, my love.");
+    }
+}
+
+function showHeart() {
+    const container = document.getElementById("heart-container");
+    const loginScreen = document.getElementById("login-screen");
+    
+    loginScreen.style.display = "none";
+    container.style.display = "block";
+
+    const totalPhrases = 150;
+
+    for (let i = 0; i < totalPhrases; i++) {
+        const t = i * (2 * Math.PI / totalPhrases);
+        
+        const x = 16 * Math.pow(Math.sin(t), 3);
+        const y = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
+        
+        const span = document.createElement("span");
+        span.className = "heart-text";
+        span.innerText = "I Love You";
+        
+        const posX = 50 + (x * 2.5); 
+        const posY = 50 + (y * 2.5);
+        
+        span.style.left = posX + "%";
+        span.style.top = posY + "%";
+        
+        span.style.animationDelay = (Math.random() * 2) + "s";
+        
+        container.appendChild(span);
+    }
+
+    setTimeout(() => {
+        container.style.transition = "opacity 2s";
+        container.style.opacity = "0";
+        
+        setTimeout(() => {
+            container.style.display = "none";
+            document.getElementById("main-content").style.display = "block";
+            iniciarRegalo();
+        }, 2000);
+    }, 5000);
 }
 
 const messages = [
