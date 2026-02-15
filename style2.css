@@ -263,3 +263,11 @@ body::after {
 }
 
 .login-card button:hover { background: #b8266d; transform: scale(1.05); }
+
+#player {
+    position: fixed;
+    bottom: -100px; /* Lo saca de la pantalla */
+    left: -100px;
+    opacity: 0;
+    pointer-events: none;
+}

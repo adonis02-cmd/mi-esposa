@@ -1,22 +1,25 @@
 const secretWord = "JreBaap1722";
-const youtubeID = "RD-P1q3rJVE";
+const youtubeID = "f_C83707pY4";
 
 let player;
 let isPlayerReady = false;
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
-        height: '0',
-        width: '0',
-        videoId: 'RD-P1q3rJVE', 
+        height: '10',
+        width: '10',
+        videoId: youtubeID, 
         playerVars: {
-            'autoplay': 0,
+            'autoplay': 1,
             'controls': 0,
             'loop': 1,
-            'playlist': 'RD-P1q3rJVE'
+            'playlist': youtubeID 
         },
         events: {
-            'onReady': () => { isPlayerReady = true; }
+            'onReady': (event) => { 
+                isPlayerReady = true;
+                event.target.setVolume(100);
+            }
         }
     });
 }
@@ -28,31 +31,20 @@ function checkPassword() {
     const errorMsg = document.getElementById("error-msg");
 
     if (input === secretWord) {
-        if (isPlayerReady && player) {
+        if (player && typeof player.playVideo === 'function') {
+            player.unMute();
             player.playVideo();
-        } else {
-            // Si el API aún no está lista, forzamos un intento manual
-            console.log("Esperando a YouTube...");
-            setTimeout(() => { if(player) player.playVideo(); }, 1000);
         }
 
         loginScreen.style.opacity = "0";
         setTimeout(() => {
             loginScreen.style.display = "none";
             mainContent.style.display = "block";
-          
-
             iniciarRegalo();
         }, 500);
     } else {
         errorMsg.style.display = "block";
     }
-    
-    document.addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') {
-            checkPassword();
-        }
-    })
 }
 
 const messages = [
@@ -113,8 +105,6 @@ function createTextBubble() {
     }, 8000);
 }
 
-setInterval(createTextBubble, 2500);
-
 const misFotos = [
     '1.jpg',
     '2.jpg',
@@ -163,6 +153,13 @@ function cambiarFondo() {
     }
 }
 
-cambiarFondo();
 
-setInterval(cambiarFondo, 4000);
+function iniciarRegalo() {
+    setInterval(createTextBubble, 2500);
+
+    setInterval(cambiarFondo, 4000);
+
+    cambiarFondo(); 
+    
+    console.log("¡Regalo iniciado para Jermelyn! ❤️");
+}
