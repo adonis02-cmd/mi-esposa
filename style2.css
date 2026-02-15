@@ -171,13 +171,21 @@ body::after {
 
 .text-bubble {
     font-family: 'Great Vibes', cursive;
-    font-style: italic; /* Puedes dejarlo si te gusta */
-    font-weight: 900 !important; /* MÁXIMO GROSOR */
-    font-size: 2.5rem; /* Un poco más grande */
+    font-weight: 900 !important; /* Letra gruesa */
+    font-size: 1.8rem; /* Tamaño equilibrado */
     color: white;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 1); /* Sombra negra fuerte */
+
+    background: rgba(255, 105, 180, 0.9); 
+    padding: 15px 25px;
+    border-radius: 30px; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
+
+    border: 2px solid rgba(255, 255, 255, 0.5);
     text-align: center;
+    max-width: 300px;
     z-index: 1000;
+
+    pointer-events: none;
 }
 
 @keyframes bubbleAnim {
