@@ -59,12 +59,11 @@ function checkName() {
 function showHeart() {
     const container = document.getElementById("heart-container");
     const languages = ["I Love You", "Mahal Kita", "Te Amo", "Ay Ayten Ka"];
-    const totalPhrases = 250; 
+    const totalPhrases = 250;
 
     document.getElementById("login-screen").style.display = "none";
-    container.innerHTML = ""; // Limpiar antes de crear
     container.style.display = "block";
-    container.style.opacity = "1";
+    container.innerHTML = ""; 
 
     for (let i = 0; i < totalPhrases; i++) {
         const t = i * (2 * Math.PI / totalPhrases);
@@ -74,28 +73,19 @@ function showHeart() {
         const span = document.createElement("span");
         span.className = "heart-text";
         span.innerText = languages[Math.floor(Math.random() * languages.length)];
-        
-        // Multiplicador ajustado a 3.8 para un tamaño grande pero seguro
-        span.style.left = (50 + x * 3.8) + "%";
-        span.style.top = (50 + y * 3.8) + "%";
+        span.style.left = (50 + x * 4) + "%";
+        span.style.top = (50 + y * 4) + "%";
         span.style.animationDelay = (Math.random() * 2) + "s";
-        
         container.appendChild(span);
     }
 
-    // TRANSICIÓN CRÍTICA
     setTimeout(() => {
         container.style.transition = "opacity 2s";
         container.style.opacity = "0";
-        
         setTimeout(() => {
             container.style.display = "none";
-            // MOSTRAR CONTENIDO
-            const mainContent = document.getElementById("main-content");
-            mainContent.style.display = "block";
-            
-            // INICIAR TODO
-            iniciarRegalo(); 
+            document.getElementById("main-content").style.display = "block";
+            iniciarRegalo();
         }, 2000);
     }, 6000);
 }
@@ -122,8 +112,8 @@ function createTextBubble() {
     bubble.innerText = messages[Math.floor(Math.random() * messages.length)];
     
     // Posiciones aleatorias evitando los bordes extremos
-    const left = Math.floor(Math.random() * 60) + 10;
-    const top = Math.floor(Math.random() * 60) + 15;
+    const left = Math.floor(Math.random() * 80) + 10;
+    const top = Math.floor(Math.random() * 80) + 15;
 
     bubble.style.left = left + "vw";
     bubble.style.top = top + "vh";
@@ -147,28 +137,34 @@ let fotoIndex = 0;
 function iniciarRegalo() {
     const galeria = document.getElementById("galeria");
     
-    // Solo creamos las imágenes si el contenedor está vacío
-    if (galeria.children.length === 0) {
-        misFotos.forEach((src, i) => {
-            const img = document.createElement("img");
-            img.src = src;
-            if (i === 0) img.classList.add("active");
-            galeria.appendChild(img);
-        });
-    }
+    // Generar la galería de doble fondo
+    misFotos.forEach((src, i) => {
+        const wrapper = document.createElement("div");
+        wrapper.className = "foto-wrapper";
+        if (i === 0) wrapper.classList.add("active");
 
-    // Intervalo de fotos: 6 segundos para que no sea estresante
+        const bgBlur = document.createElement("img");
+        bgBlur.src = src;
+        bgBlur.className = "bg-desenfocado";
+
+        const imgCentral = document.createElement("img");
+        imgCentral.src = src;
+        imgCentral.className = "img-central";
+
+        wrapper.appendChild(bgBlur);
+        wrapper.appendChild(imgCentral);
+        galeria.appendChild(wrapper);
+    });
+
+    // Cambiar fotos cada 5 segundos
     setInterval(cambiarImagen, 5000);
-    
-    // Intervalo de burbujas: cada 4 segundos sale una nueva
+    // Burbujas de texto cada 2.5 segundos (independiente de las fotos)
     setInterval(createTextBubble, 2500);
 }
 
 function cambiarImagen() {
-    const imagenes = document.querySelectorAll("#galeria img");
-    if (imagenes.length === 0) return;
-
-    imagenes[fotoIndex].classList.remove("active");
-    fotoIndex = (fotoIndex + 1) % imagenes.length;
-    imagenes[fotoIndex].classList.add("active");
+    const wrappers = document.querySelectorAll(".foto-wrapper");
+    wrappers[fotoIndex].classList.remove("active");
+    fotoIndex = (fotoIndex + 1) % wrappers.length;
+    wrappers[fotoIndex].classList.add("active");
 }

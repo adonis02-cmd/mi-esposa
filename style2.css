@@ -10,29 +10,34 @@ body {
     background-color: black;
     overflow: hidden;
     position: relative;
+    font-family: Arial, sans-serif;
 }
+
+#main-content { display: none; width: 100%; height: 100%; }
 
 #galeria {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    z-index: 1;
     background-color: black;
+    z-index: 1;
 }
 
-#galeria img {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    /* 'cover' asegura que no queden espacios negros, 'center' enfoca las caras */
-    object-fit: cover; 
-    object-position: center; 
-    opacity: 0;
-    transition: opacity 2s ease-in-out; /* Transición más lenta y suave */
+.foto-wrapper {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    opacity: 0; transition: opacity 2s ease-in-out;
+    display: flex; justify-content: center; align-items: center;
 }
+.foto-wrapper.active { opacity: 1; }
 
-#galeria img.active {
-    opacity: 1;
+.bg-desenfocado {
+    position: absolute; width: 100%; height: 100%;
+    object-fit: cover; filter: blur(15px) brightness(0.6); z-index: 1;
+}
+/* Foto central nítida */
+.img-central {
+    position: relative; max-width: 90%; max-height: 80%;
+    object-fit: contain; z-index: 2; box-shadow: 0 0 50px rgba(0,0,0,0.8);
 }
 
 .message {
@@ -40,18 +45,17 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 1000;
-    
-    background: rgba(255, 255, 255, 0.75); /* Más transparente para ver la foto */
-    padding: 15px 30px;
+    z-index: 5000;
+    background: rgba(255, 255, 255, 0.7); /* Más transparente para ver la foto */
+    padding: 20px 40px;
     border-radius: 50px; /* Bordes más redondeados */
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-    
+    font-weight: bold;
     color: #d63384;
-    font-family: Arial, 'Sans Serif';
-    font-size: clamp(1.5rem, 5vw, 2.5rem); /* Tamaño más equilibrado */
+    font-family: Arial, sans-serif;
+    font-size: clamp(1.8rem, 6vw, 3rem); /* Tamaño más equilibrado */
     text-align: center;
-    
+    animation: bounce 2s infinite ease-in-out;
     pointer-events: none;
 }
 
@@ -60,11 +64,13 @@ body {
     50% { transform: translate(-50%, -60%); }
 }
 
+@keyframes heartbeat { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.1); } }
+
 #bubbles-text {
     position: fixed;
     top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    z-index: 1500;
+    width: 100%; height: 100%;
+    z-index: 6000;
     pointer-events: none;
 }
 
@@ -72,22 +78,21 @@ body {
     position: absolute;
     font-family: 'Great Vibes', cursive;
     font-style: italic;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     color: #d63384;
     background: rgba(255, 255, 255, 0.9);
-    padding: 10px 20px;
+    padding: 12px 22px;
     border-radius: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     text-align: center;
-    max-width: 280px;
     animation: bubbleFade 8s ease-in-out forwards;
 }
 
 @keyframes bubbleFade {
-    0% { opacity: 0; transform: translateY(10px) scale(0.9); }
+    0% { opacity: 0; transform: translateY(20px) scale(0.9); }
     15% { opacity: 1; transform: translateY(0) scale(1); }
-    85% { opacity: 1; transform: translateY(-10px) scale(1); }
-    100% { opacity: 0; transform: translateY(-20px) scale(0.9); }
+    85% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-30px) scale(0.9); }
 }
 
 /* 5. LOGIN Y CORAZÓN */
@@ -127,4 +132,14 @@ body {
 @keyframes fadeIn {
     from { opacity: 0; transform: scale(0.8); }
     to { opacity: 1; transform: scale(1); }
+}
+
+#heart-container {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: url('30.jpg'); background-size: cover; background-position: center;
+    display: none; z-index: 9000;
+}
+.heart-text {
+    position: absolute; color: #ff4d4d; font-weight: bold; font-size: 12px;
+    transform: translate(-50%, -50%); animation: heartbeat 1.5s infinite;
 }
