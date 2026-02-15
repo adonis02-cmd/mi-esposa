@@ -175,7 +175,7 @@ body::after {
     border-radius: 20px;
     color: #d63384;
     font-family: 'Great Vibes', cursive;
-    font-weight: 300;
+    font-weight: 600 !important;
     font-size: clamp(12px, 4vw, 16px);
     font-style: italic;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);

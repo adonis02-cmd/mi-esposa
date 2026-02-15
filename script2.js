@@ -6,19 +6,20 @@ let isPlayerReady = false;
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
-        height: '10',
-        width: '10',
-        videoId: youtubeID, 
+        height: '100', 
+        width: '100',
+        videoId: youtubeID,
         playerVars: {
             'autoplay': 1,
             'controls': 0,
-            'loop': 1,
-            'playlist': youtubeID 
+            'mute': 0, 
+            'playlist': youtubeID,
+            'loop': 1
         },
         events: {
-            'onReady': (event) => { 
+            'onReady': (event) => {
                 isPlayerReady = true;
-                event.target.setVolume(100);
+                event.target.setVolume(100); 
             }
         }
     });
@@ -31,10 +32,11 @@ function checkPassword() {
     const errorMsg = document.getElementById("error-msg");
 
     if (input === secretWord) {
-        if (player && typeof player.playVideo === 'function') {
-            player.unMute();
-            player.playVideo();
-        }
+    	if (player) {
+        	player.unMute();
+        	player.setVolume(100);
+        	player.playVideo();
+    	}
 
         loginScreen.style.opacity = "0";
         setTimeout(() => {
