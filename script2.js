@@ -61,8 +61,10 @@ function showHeart() {
     const languages = ["I Love You", "Mahal Kita", "Te Amo", "Ay Ayten Ka"];
     const totalPhrases = 250;
 
+    // IMPORTANTE: Asegúrate de que el contenedor esté visible ANTES de llenarlo
     document.getElementById("login-screen").style.display = "none";
     container.style.display = "block";
+    container.style.opacity = "1";
     container.innerHTML = ""; 
 
     for (let i = 0; i < totalPhrases; i++) {
@@ -73,6 +75,8 @@ function showHeart() {
         const span = document.createElement("span");
         span.className = "heart-text";
         span.innerText = languages[Math.floor(Math.random() * languages.length)];
+        
+        // Ajuste de escala para que el corazón se vea bien en cualquier pantalla
         span.style.left = (50 + x * 4) + "%";
         span.style.top = (50 + y * 4) + "%";
         span.style.animationDelay = (Math.random() * 2) + "s";
@@ -85,7 +89,7 @@ function showHeart() {
         setTimeout(() => {
             container.style.display = "none";
             document.getElementById("main-content").style.display = "block";
-            iniciarRegalo();
+            iniciarRegalo(); // Llama a la galería
         }, 2000);
     }, 6000);
 }
@@ -136,32 +140,24 @@ const misFotos = [
 let fotoIndex = 0;
 function iniciarRegalo() {
     const galeria = document.getElementById("galeria");
-    
-    // Generar la galería de doble fondo
+    if (galeria.children.length > 0) return; // Evita duplicados
+
     misFotos.forEach((src, i) => {
         const wrapper = document.createElement("div");
         wrapper.className = "foto-wrapper";
         if (i === 0) wrapper.classList.add("active");
-	wrapper.innerHTML = `
+
+        // Estructura de Doble Fondo:
+        // 1. Imagen que se estira y desenfoca (Fondo)
+        // 2. Imagen que mantiene tamaño natural (Centro)
+        wrapper.innerHTML = `
             <img src="${src}" class="bg-desenfocado">
             <img src="${src}" class="img-central">
-
-        const bgBlur = document.createElement("img");
-        bgBlur.src = src;
-        bgBlur.className = "bg-desenfocado";
-
-        const imgCentral = document.createElement("img");
-        imgCentral.src = src;
-        imgCentral.className = "img-central";
-
-        wrapper.appendChild(bgBlur);
-        wrapper.appendChild(imgCentral);
+        `;
         galeria.appendChild(wrapper);
     });
 
-    // Cambiar fotos cada 5 segundos
     setInterval(cambiarImagen, 5000);
-    // Burbujas de texto cada 2.5 segundos (independiente de las fotos)
     setInterval(createTextBubble, 2500);
 }
 
