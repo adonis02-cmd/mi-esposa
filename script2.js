@@ -114,19 +114,15 @@ const messages = [
 ];
 
 function createTextBubble() {
-    // IMPORTANTE: Asegúrate de que este ID coincida con tu HTML
-    const container = document.getElementById("bubble-container"); 
-    if (!container) {
-        console.error("No se encontró el contenedor de burbujas");
-        return;
-    }
+    const container = document.getElementById("bubbles-text");
+    if (!container) return;
 
     const bubble = document.createElement("div");
     bubble.className = "text-bubble";
     bubble.innerText = messages[Math.floor(Math.random() * messages.length)];
     
-    // Posiciones aleatorias
-    const left = Math.floor(Math.random() * 60) + 15;
+    // Posiciones aleatorias evitando los bordes extremos
+    const left = Math.floor(Math.random() * 60) + 10;
     const top = Math.floor(Math.random() * 60) + 15;
 
     bubble.style.left = left + "vw";
@@ -134,11 +130,10 @@ function createTextBubble() {
 
     container.appendChild(bubble);
 
+    // Se eliminan solas después de que termina la animación de 8s del CSS
     setTimeout(() => {
-        bubble.style.opacity = "0";
-        bubble.style.transition = "opacity 1s";
-        setTimeout(() => bubble.remove(), 1000);
-    }, 6000);
+        bubble.remove();
+    }, 8500);
 }
 
 const misFotos = [
@@ -149,11 +144,11 @@ const misFotos = [
 ];
 
 let fotoIndex = 0;
-
 function iniciarRegalo() {
-   
     const galeria = document.getElementById("galeria");
-    if (galeria && galeria.children.length === 0) {
+    
+    // Solo creamos las imágenes si el contenedor está vacío
+    if (galeria.children.length === 0) {
         misFotos.forEach((src, i) => {
             const img = document.createElement("img");
             img.src = src;
@@ -162,11 +157,11 @@ function iniciarRegalo() {
         });
     }
 
-
-    setInterval(cambiarImagen, 4000);
-    setInterval(createTextBubble, 2500);
+    // Intervalo de fotos: 6 segundos para que no sea estresante
+    setInterval(cambiarImagen, 5000);
     
-    console.log("Galería y burbujas iniciadas correctamente.");
+    // Intervalo de burbujas: cada 4 segundos sale una nueva
+    setInterval(createTextBubble, 2500);
 }
 
 function cambiarImagen() {
