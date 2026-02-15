@@ -229,86 +229,83 @@ body::after {
     .bubbles { font-size: 20px; }
 }
 
+/* Pantalla de Inicio con Fondo y Desenfoque */
 #login-screen {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); /* Fondo rosado suave */
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 10000;
+    /* Fondo con vuestra foto de login */
+    background-image: url('1.jpg'); 
+    background-size: cover;
+    background-position: center;
+}
+
+/* Efecto de desenfoque solo al fondo para que la tarjeta resalte */
+#login-screen::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Capa oscura */
+    backdrop-filter: blur(8px); /* Desenfoque profesional */
+    z-index: -1;
 }
 
 .login-card {
-    background: rgba(255, 255, 255, 0.9); /* Blanco elegante traslúcido */
+    background: rgba(255, 255, 255, 0.9);
     padding: 40px;
-    border-radius: 30px; /* Muy redondeado */
-    box-shadow: 0 10px 25px rgba(214, 51, 132, 0.3); /* Sombra rosa suave */
-    border: 3px solid #ff85a2; /* Borde rosa bonito */
+    border-radius: 30px;
+    box-shadow: 0 10px 25px rgba(214, 51, 132, 0.3);
+    border: 3px solid #ff85a2;
     text-align: center;
     max-width: 400px;
     width: 90%;
     animation: fadeIn 0.8s ease-out;
 }
 
-.login-card h2 {
-    color: #d63384;
-    font-family: 'Arial', sans-serif;
-    margin-bottom: 15px;
-}
-
-.login-card input {
-    width: 80%;
-    padding: 12px;
-    margin: 20px 0;
-    border: 2px solid #ffb3c6;
-    border-radius: 20px;
-    outline: none;
-    text-align: center;
-}
-
-.login-card button {
-    background: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 12px 30px;
-    border-radius: 25px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: transform 0.3s;
-}
-
-.login-card button:hover {
-    transform: scale(1.1);
-    background: #ff1a1a;
-}
-
-#player {
-    position: fixed;
-    bottom: -100px;
-    left: -100px;
-    opacity: 0;
-    pointer-events: none;
-}
-
+/* Contenedor del Corazón con Foto de Fondo */
 #heart-container {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background-color: black; /* Backup */
     background-image: url('30.jpg');
     background-size: cover;
     background-position: center;
     z-index: 9999;
+    display: none; /* Se activa con JS */
 }
 
+/* Oscurecer fondo del corazón para que los textos rojos resalten */
 #heart-container::before {
     content: "";
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.6); 
+}
+
+/* AJUSTE CLAVE: Centrado de los textos del corazón */
+.heart-text {
+    position: absolute;
+    color: #ff4d4d;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    white-space: nowrap;
+    transform: translate(-50%, -50%); /* Centra cada palabra en su coordenada */
+    animation: heartbeat 1.5s infinite ease-in-out;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.8); /* Brillo para que se vea sobre la foto */
+}
+
+/* Arreglo para la Galería (Evita el flash negro) */
+#galeria {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: black;
 }
 
 #galeria img {
@@ -317,24 +314,34 @@ body::after {
     width: 100%; height: 100%;
     object-fit: cover;
     opacity: 0;
-    transition: opacity 1.5s ease-in-out; 
+    transition: opacity 1.5s ease-in-out; /* Fundido suave */
 }
 
 #galeria img.active {
     opacity: 1;
 }
 
-.heart-text {
-    position: absolute;
-    color: #ff4d4d; /* Rojo romántico */
-    font-family: 'Arial', sans-serif;
-    font-size: 14px;
-    font-weight: bold;
-    white-space: nowrap;
-    animation: heartbeat 1.5s infinite ease-in-out;
+/* Mensaje Principal al final */
+.message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-family: 'Great Vibes', cursive;
+    font-size: 4rem;
+    text-align: center;
+    z-index: 1000;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+    pointer-events: none;
 }
 
 @keyframes heartbeat {
-    0%, 100% { transform: scale(1); opacity: 0.7; }
-    50% { transform: scale(1.2); opacity: 1; }
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }

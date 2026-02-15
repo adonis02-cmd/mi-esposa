@@ -5,6 +5,7 @@ const youtubeID = "f_C83707pY4";
 let player;
 let isPlayerReady = false;
 
+// 1. YouTube API
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
         height: '100', 
@@ -25,44 +26,35 @@ function onYouTubeIframeAPIReady() {
         }
     });
 }
- 
+
+// 2. Validación de Contraseña
 function checkPassword() {
     const input = document.getElementById("password-input").value;
-    const step1 = document.getElementById("step-1");
-    const step2 = document.getElementById("step-2");
-    const errorMsg = document.getElementById("error-msg");
-
     if (input === secretWord) {
-        step1.style.display = "none";
-        step2.style.display = "block";
-        errorMsg.style.display = "none";
-        console.log("Contraseña correcta, pasando al nombre...");
-        
-       
-        if (typeof player !== 'undefined' && player) {
+        document.getElementById("step-1").style.display = "none";
+        document.getElementById("step-2").style.display = "block";
+        if (player) {
             player.unMute();
             player.playVideo();
             player.setVolume(0); 
         }
     } else {
-        errorMsg.style.display = "block";
-        console.log("Contraseña incorrecta");
+        document.getElementById("error-msg").style.display = "block";
     }
 }
 
+// 3. Validación de Nombre
 function checkName() {
     const nameInput = document.getElementById("name-input").value.trim();
-    
     if (nameInput.toLowerCase() === secretName.toLowerCase()) {
-        if (typeof player !== 'undefined' && player) {
-            player.setVolume(100);
-        }
+        if (player) player.setVolume(100);
         showHeart(); 
     } else {
         alert("That is not the name of my queen... Please try again.");
     }
 }
 
+// 4. Corazón Gigante con 4 idiomas
 function showHeart() {
     const container = document.getElementById("heart-container");
     const languages = ["I Love You", "Mahal Kita", "Te Amo", "Ay Ayten Ka"];
@@ -80,7 +72,6 @@ function showHeart() {
         span.className = "heart-text";
         span.innerText = languages[Math.floor(Math.random() * languages.length)];
         
-        // Corazón más grande (multiplicador 4.5)
         span.style.left = (50 + x * 4.5) + "%";
         span.style.top = (50 + y * 4.5) + "%";
         span.style.animationDelay = (Math.random() * 2) + "s";
@@ -94,11 +85,10 @@ function showHeart() {
         setTimeout(() => {
             container.style.display = "none";
             document.getElementById("main-content").style.display = "block";
-            iniciarGaleria(); // Llamamos a la nueva función de la galería
+            iniciarRegalo(); 
         }, 2000);
     }, 7000);
 }
-
 
 const messages = [
     "I love you so much my life❤️",
@@ -159,61 +149,36 @@ function createTextBubble() {
 }
 
 const misFotos = [
-    '1.jpg',
-    '2.jpg',
-    '3.jpg',
-    '4.jpg',
-    '5.jpg',
-    '6.jpg',
-    '7.jpg',
-    '8.jpg',
-    '9.jpg',
-    '10.jpg',
-    '11.jpg',
-    '12.jpg',
-    '13.jpg',
-    '14.jpg',
-    '15.jpg',
-    '16.jpg',
-    '17.jpg',
-    '18.jpg',
-    '19.jpg',
-    '20.jpg',
-    '21.jpg',
-    '22.jpg',
-    '23.jpg',
-    '24.jpg',
-    '25.jpg',
-    '26.jpg',
-    '27.jpg',
-    '28.jpg',
-    '29.jpg',
-    '30.jpg',
-    '31.jpg',
-    '32.jpg',
-    '33.jpg',
-    '34.jpg'
+    '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg',
+    '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '17.jpg', '18.jpg', '19.jpg', '20.jpg',
+    '21.jpg', '22.jpg', '23.jpg', '24.jpg', '25.jpg', '26.jpg', '27.jpg', '28.jpg', '29.jpg', '30.jpg',
+    '31.jpg', '32.jpg', '33.jpg', '34.jpg'
 ];
 
-let index = 0;
-function iniciarGaleria() {
-    const imagenes = document.querySelectorAll("${misFotos[index]}");
-    
-    function cambiarImagen() {
-        // Quitamos la clase 'active' de todas
-        imagenes.forEach(img => img.classList.remove("active"));
-        
-        // Ponemos 'active' a la siguiente
-        imagenes[index].classList.add("active");
-        
-        index = (index + 1) % imagenes.length;
-    }
-
-}
+let fotoIndex = 0;
 
 function iniciarRegalo() {
-    setInterval(createTextBubble, 2500);
-    cambiarImagen(); // Primera imagen
+    const galeria = document.getElementById("galeria");
+    
+    // Crear las imágenes en el DOM
+    misFotos.forEach((src, i) => {
+        const img = document.createElement("img");
+        img.src = src;
+        if (i === 0) img.classList.add("active");
+        galeria.appendChild(img);
+    });
+
+    // Iniciar intervalo de fotos
     setInterval(cambiarImagen, 4000);
-    console.log("¡Regalo iniciado para Jermelyn! ❤️");
+    // Iniciar burbujas de texto
+    setInterval(createTextBubble, 2500);
+}
+
+function cambiarImagen() {
+    const imagenes = document.querySelectorAll("#galeria img");
+    if (imagenes.length === 0) return;
+
+    imagenes[fotoIndex].classList.remove("active");
+    fotoIndex = (fotoIndex + 1) % imagenes.length;
+    imagenes[fotoIndex].classList.add("active");
 }

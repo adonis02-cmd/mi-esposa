@@ -1,43 +1,43 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
+<html lang="en"> <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para mi esposa</title>
+    <title>For My Wife</title>
     <link rel="stylesheet" href="style2.css">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div style="position: absolute; top: -1000px;">
-        <div id="player"></div>
-    </div>    
 
     <div id="login-screen">
-    	<div id="step-1" class="login-card">
-        	<h2>🔒 Private Access</h2>
-        	<p>Enter our secret password to see your gift:</p>
-        	<input type="password" id="password-input" placeholder="Type here...">
-        	<button onclick="checkPassword()">Unlock ❤️</button>
-        	<p id="error-msg" style="color: #ff4d4d; display: none; font-size: 14px; margin-top: 10px;">Incorrect password, try again my love.</p>
-    	</div>
+        <div id="step-1" class="login-card">
+            <h2>🔒 Private Access</h2>
+            <p>Enter our secret password to see your gift:</p>
+            <input type="password" id="password-input" placeholder="Type here...">
+            <button onclick="checkPassword()">Unlock ❤️</button>
+            <p id="error-msg" style="color: #ff4d4d; display: none; font-size: 14px; margin-top: 10px;">Incorrect password, try again my love.</p>
+        </div>
 
-    	<div id="step-2" class="login-card" style="display: none;">
-        	<h2>One more thing... ❤️</h2>
-        	<p>What is the name of my favorite girl in the world?</p>
-        	<input type="text" id="name-input" placeholder="Your beautiful name...">
-        	<button onclick="checkName()">Show me ✨</button>
-    	</div>
+        <div id="step-2" class="login-card" style="display: none;">
+            <h2>One more thing... ❤️</h2>
+            <p>What is the name of my favorite girl in the world?</p>
+            <input type="text" id="name-input" placeholder="Your beautiful name...">
+            <button onclick="checkName()">Show me ✨</button>
+        </div>
     </div>
 
     <div id="heart-container" style="display: none;"></div>
 
     <div id="main-content" style="display: none;">
-    	<div id="galeria">
-     		</div>
-    
-    <div id="player"></div> <div id="bubble-container"></div> </div>
+        <div id="galeria">
+            </div>
+        
         <div class="message">I LOVE YOU JERMELYN</div>
-        <div id="bubbles-text"></div>
+        
+        <div id="bubble-container"></div>
+    </div>
+
+    <div style="position: absolute; left: -9999px; top: -9999px;">
+        <div id="player"></div>
     </div>
 
     <script src="https://www.youtube.com/iframe_api"></script>
