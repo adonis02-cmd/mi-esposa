@@ -65,45 +65,40 @@ function checkName() {
 
 function showHeart() {
     const container = document.getElementById("heart-container");
-    const loginScreen = document.getElementById("login-screen");
-    
-    loginScreen.style.display = "none";
-    container.style.display = "block";
+    const languages = ["I Love You", "Mahal Kita", "Te Amo", "Ay Ayten Ka"];
+    const totalPhrases = 250; 
 
-    const totalPhrases = 150;
+    document.getElementById("login-screen").style.display = "none";
+    container.style.display = "block";
 
     for (let i = 0; i < totalPhrases; i++) {
         const t = i * (2 * Math.PI / totalPhrases);
-        
         const x = 16 * Math.pow(Math.sin(t), 3);
         const y = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
         
         const span = document.createElement("span");
         span.className = "heart-text";
-        span.innerText = "I Love You";
+        span.innerText = languages[Math.floor(Math.random() * languages.length)];
         
-        const posX = 50 + (x * 2.5); 
-        const posY = 50 + (y * 2.5);
-        
-        span.style.left = posX + "%";
-        span.style.top = posY + "%";
-        
+        // Corazón más grande (multiplicador 4.5)
+        span.style.left = (50 + x * 4.5) + "%";
+        span.style.top = (50 + y * 4.5) + "%";
         span.style.animationDelay = (Math.random() * 2) + "s";
         
         container.appendChild(span);
     }
 
     setTimeout(() => {
-        container.style.transition = "opacity 2s";
         container.style.opacity = "0";
-        
+        container.style.transition = "opacity 2s";
         setTimeout(() => {
             container.style.display = "none";
             document.getElementById("main-content").style.display = "block";
-            iniciarRegalo();
+            iniciarGaleria(); // Llamamos a la nueva función de la galería
         }, 2000);
-    }, 5000);
+    }, 7000);
 }
+
 
 const messages = [
     "I love you so much my life❤️",
@@ -200,24 +195,25 @@ const misFotos = [
     '34.jpg'
 ];
 
-let indiceFoto = 0;
-
-function cambiarFondo() {
-    const cuerpo = document.body;
-    cuerpo.style.backgroundImage = `url('${misFotos[indiceFoto]}')`;
-     indiceFoto++;
-        if (indiceFoto >= misFotos.length) {
-        indiceFoto = 0;
+let index = 0;
+function iniciarGaleria() {
+    const imagenes = document.querySelectorAll("${misFotos[index]}");
+    
+    function cambiarImagen() {
+        // Quitamos la clase 'active' de todas
+        imagenes.forEach(img => img.classList.remove("active"));
+        
+        // Ponemos 'active' a la siguiente
+        imagenes[index].classList.add("active");
+        
+        index = (index + 1) % imagenes.length;
     }
-}
 
+}
 
 function iniciarRegalo() {
     setInterval(createTextBubble, 2500);
-
-    setInterval(cambiarFondo, 4000);
-
-    cambiarFondo(); 
-    
+    cambiarImagen(); // Primera imagen
+    setInterval(cambiarImagen, 4000);
     console.log("¡Regalo iniciado para Jermelyn! ❤️");
 }
