@@ -142,6 +142,9 @@ function iniciarRegalo() {
         const wrapper = document.createElement("div");
         wrapper.className = "foto-wrapper";
         if (i === 0) wrapper.classList.add("active");
+	wrapper.innerHTML = `
+            <img src="${src}" class="bg-desenfocado">
+            <img src="${src}" class="img-central">
 
         const bgBlur = document.createElement("img");
         bgBlur.src = src;
