@@ -46,7 +46,6 @@ body {
     max-height: 85%;
     object-fit: contain; 
     box-shadow: 0 0 50px rgba(0,0,0,0.8);
-    border-radius: 5px; /* Un toque de elegancia */
 }
 
 .message {
