@@ -290,6 +290,7 @@ body::after {
 
 /* AJUSTE CLAVE: Centrado de los textos del corazón */
 .heart-text {
+    font-size: 12px;
     position: absolute;
     color: #ff4d4d;
     font-family: 'Arial', sans-serif;

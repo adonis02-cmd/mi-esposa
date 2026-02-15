@@ -55,13 +55,16 @@ function checkName() {
 }
 
 // 4. Corazón Gigante con 4 idiomas
+
 function showHeart() {
     const container = document.getElementById("heart-container");
     const languages = ["I Love You", "Mahal Kita", "Te Amo", "Ay Ayten Ka"];
     const totalPhrases = 250; 
 
     document.getElementById("login-screen").style.display = "none";
+    container.innerHTML = ""; // Limpiar antes de crear
     container.style.display = "block";
+    container.style.opacity = "1";
 
     for (let i = 0; i < totalPhrases; i++) {
         const t = i * (2 * Math.PI / totalPhrases);
@@ -72,22 +75,29 @@ function showHeart() {
         span.className = "heart-text";
         span.innerText = languages[Math.floor(Math.random() * languages.length)];
         
-        span.style.left = (50 + x * 4.5) + "%";
-        span.style.top = (50 + y * 4.5) + "%";
+        // Multiplicador ajustado a 3.8 para un tamaño grande pero seguro
+        span.style.left = (50 + x * 3.8) + "%";
+        span.style.top = (50 + y * 3.8) + "%";
         span.style.animationDelay = (Math.random() * 2) + "s";
         
         container.appendChild(span);
     }
 
+    // TRANSICIÓN CRÍTICA
     setTimeout(() => {
-        container.style.opacity = "0";
         container.style.transition = "opacity 2s";
+        container.style.opacity = "0";
+        
         setTimeout(() => {
             container.style.display = "none";
-            document.getElementById("main-content").style.display = "block";
+            // MOSTRAR CONTENIDO
+            const mainContent = document.getElementById("main-content");
+            mainContent.style.display = "block";
+            
+            // INICIAR TODO
             iniciarRegalo(); 
         }, 2000);
-    }, 7000);
+    }, 6000);
 }
 
 const messages = [
@@ -158,20 +168,22 @@ const misFotos = [
 let fotoIndex = 0;
 
 function iniciarRegalo() {
+   
     const galeria = document.getElementById("galeria");
-    
-    // Crear las imágenes en el DOM
-    misFotos.forEach((src, i) => {
-        const img = document.createElement("img");
-        img.src = src;
-        if (i === 0) img.classList.add("active");
-        galeria.appendChild(img);
-    });
+    if (galeria && galeria.children.length === 0) {
+        misFotos.forEach((src, i) => {
+            const img = document.createElement("img");
+            img.src = src;
+            if (i === 0) img.classList.add("active");
+            galeria.appendChild(img);
+        });
+    }
 
-    // Iniciar intervalo de fotos
+
     setInterval(cambiarImagen, 4000);
-    // Iniciar burbujas de texto
     setInterval(createTextBubble, 2500);
+    
+    console.log("Galería y burbujas iniciadas correctamente.");
 }
 
 function cambiarImagen() {
