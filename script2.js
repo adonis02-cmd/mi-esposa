@@ -53,23 +53,20 @@ function checkName() {
 function showHeart() {
     const container = document.getElementById("heart-container");
     const languages = ["I Love You", "Mahal Kita", "Te Amo", "Ay Ayten Ka"];
-    const totalPhrases = 250;
-
+    
     document.getElementById("login-screen").style.display = "none";
     container.style.display = "block";
     container.innerHTML = ""; 
 
-    for (let i = 0; i < totalPhrases; i++) {
-        const t = i * (2 * Math.PI / totalPhrases);
+    for (let i = 0; i < 250; i++) {
+        const t = i * (2 * Math.PI / 250);
         const x = 16 * Math.pow(Math.sin(t), 3);
         const y = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
-        
         const span = document.createElement("span");
         span.className = "heart-text";
         span.innerText = languages[Math.floor(Math.random() * languages.length)];
         span.style.left = (50 + x * 4) + "%";
         span.style.top = (50 + y * 4) + "%";
-        span.style.animationDelay = (Math.random() * 2) + "s";
         container.appendChild(span);
     }
 
@@ -133,21 +130,29 @@ function iniciarRegalo() {
         wrapper.className = "foto-wrapper";
         if (i === 0) wrapper.classList.add("active");
 
-        const bg = document.createElement("img");
-        bg.src = src;
-        bg.className = "bg-desenfocado";
-
-        const img = document.createElement("img");
-        img.src = src;
-        img.className = "img-central";
-
-        wrapper.appendChild(bg);
-        wrapper.appendChild(img);
+        wrapper.innerHTML = `
+            <img src="${src}" class="bg-desenfocado">
+            <img src="${src}" class="img-central">
+        `;
         galeria.appendChild(wrapper);
     });
 
-    setInterval(cambiarImagen, 5000);
-    setInterval(createTextBubble, 2500);
+    setInterval(cambiarImagen, 5000); // Fotos cada 5 seg
+    setInterval(createTextBubble, 3000); // Burbujas cada 3 seg (más tiempo para leer)
+}
+
+function createTextBubble() {
+    const container = document.getElementById("bubbles-text");
+    const bubble = document.createElement("div");
+    bubble.className = "text-bubble";
+    bubble.innerText = messages[Math.floor(Math.random() * messages.length)];
+    
+    // Posición aleatoria por toda la pantalla
+    bubble.style.left = (Math.random() * 60 + 5) + "vw";
+    bubble.style.top = (Math.random() * 70 + 5) + "vh";
+
+    container.appendChild(bubble);
+    setTimeout(() => bubble.remove(), 9000);
 }
 
 function cambiarImagen() {
@@ -157,5 +162,4 @@ function cambiarImagen() {
     fotoIndex = (fotoIndex + 1) % wrappers.length;
     wrappers[fotoIndex].classList.add("active");
 }
-
 
