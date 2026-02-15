@@ -8,8 +8,8 @@ let isPlayerReady = false;
 // 1. YouTube API
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
-        height: '100', 
-        width: '100',
+        height: '0', 
+        width: '0',
         videoId: youtubeID,
         playerVars: {
             'autoplay': 1,
@@ -27,7 +27,6 @@ function onYouTubeIframeAPIReady() {
     });
 }
 
-// 2. Validación de Contraseña
 function checkPassword() {
     const input = document.getElementById("password-input").value;
     if (input === secretWord) {
@@ -36,35 +35,28 @@ function checkPassword() {
         if (player) {
             player.unMute();
             player.playVideo();
-            player.setVolume(0); 
         }
     } else {
         document.getElementById("error-msg").style.display = "block";
     }
 }
 
-// 3. Validación de Nombre
 function checkName() {
     const nameInput = document.getElementById("name-input").value.trim();
     if (nameInput.toLowerCase() === secretName.toLowerCase()) {
-        if (player) player.setVolume(100);
         showHeart(); 
     } else {
         alert("That is not the name of my queen... Please try again.");
     }
 }
 
-// 4. Corazón Gigante con 4 idiomas
-
 function showHeart() {
     const container = document.getElementById("heart-container");
     const languages = ["I Love You", "Mahal Kita", "Te Amo", "Ay Ayten Ka"];
     const totalPhrases = 250;
 
-    // IMPORTANTE: Asegúrate de que el contenedor esté visible ANTES de llenarlo
     document.getElementById("login-screen").style.display = "none";
     container.style.display = "block";
-    container.style.opacity = "1";
     container.innerHTML = ""; 
 
     for (let i = 0; i < totalPhrases; i++) {
@@ -75,8 +67,6 @@ function showHeart() {
         const span = document.createElement("span");
         span.className = "heart-text";
         span.innerText = languages[Math.floor(Math.random() * languages.length)];
-        
-        // Ajuste de escala para que el corazón se vea bien en cualquier pantalla
         span.style.left = (50 + x * 4) + "%";
         span.style.top = (50 + y * 4) + "%";
         span.style.animationDelay = (Math.random() * 2) + "s";
@@ -89,7 +79,7 @@ function showHeart() {
         setTimeout(() => {
             container.style.display = "none";
             document.getElementById("main-content").style.display = "block";
-            iniciarRegalo(); // Llama a la galería
+            iniciarRegalo();
         }, 2000);
     }, 6000);
 }
@@ -115,16 +105,12 @@ function createTextBubble() {
     bubble.className = "text-bubble";
     bubble.innerText = messages[Math.floor(Math.random() * messages.length)];
     
-    // Posiciones aleatorias evitando los bordes extremos
-    const left = Math.floor(Math.random() * 80) + 10;
-    const top = Math.floor(Math.random() * 80) + 15;
-
-    bubble.style.left = left + "vw";
-    bubble.style.top = top + "vh";
+    // Posición aleatoria
+    bubble.style.left = (Math.random() * 60 + 10) + "vw";
+    bubble.style.top = (Math.random() * 60 + 15) + "vh";
 
     container.appendChild(bubble);
 
-    // Se eliminan solas después de que termina la animación de 8s del CSS
     setTimeout(() => {
         bubble.remove();
     }, 8500);
@@ -140,20 +126,23 @@ const misFotos = [
 let fotoIndex = 0;
 function iniciarRegalo() {
     const galeria = document.getElementById("galeria");
-    if (galeria.children.length > 0) return; // Evita duplicados
+    if (galeria.children.length > 0) return;
 
     misFotos.forEach((src, i) => {
         const wrapper = document.createElement("div");
         wrapper.className = "foto-wrapper";
         if (i === 0) wrapper.classList.add("active");
 
-        // Estructura de Doble Fondo:
-        // 1. Imagen que se estira y desenfoca (Fondo)
-        // 2. Imagen que mantiene tamaño natural (Centro)
-        wrapper.innerHTML = `
-            <img src="${src}" class="bg-desenfocado">
-            <img src="${src}" class="img-central">
-        `;
+        const bg = document.createElement("img");
+        bg.src = src;
+        bg.className = "bg-desenfocado";
+
+        const img = document.createElement("img");
+        img.src = src;
+        img.className = "img-central";
+
+        wrapper.appendChild(bg);
+        wrapper.appendChild(img);
         galeria.appendChild(wrapper);
     });
 
@@ -163,7 +152,10 @@ function iniciarRegalo() {
 
 function cambiarImagen() {
     const wrappers = document.querySelectorAll(".foto-wrapper");
+    if (wrappers.length === 0) return;
     wrappers[fotoIndex].classList.remove("active");
     fotoIndex = (fotoIndex + 1) % wrappers.length;
     wrappers[fotoIndex].classList.add("active");
 }
+
+

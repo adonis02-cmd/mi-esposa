@@ -30,13 +30,23 @@ body {
 .foto-wrapper.active { opacity: 1; }
 
 .bg-desenfocado {
-    position: absolute; width: 100%; height: 100%;
-    object-fit: cover; filter: blur(15px) brightness(0.5); z-index: -1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Este llena toda la pantalla */
+    filter: blur(20px) brightness(0.5); /* Desenfoque intenso */
+    z-index: 1;
 }
-/* Foto central nítida */
+
 .img-central {
-    position: relative; max-width: 100%; max-height: 100%;
-    object-fit: contain; z-index: 2; box-shadow: 0 0 40px rgba(0,0,0,0.8);
+    position: relative; 
+    z-index: 2;
+    /* ESTO asegura que la foto se vea en su tamaño natural sin estirarse */
+    max-width: 95%; 
+    max-height: 85%;
+    object-fit: contain; 
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    border-radius: 5px; /* Un toque de elegancia */
 }
 
 .message {
@@ -70,11 +80,12 @@ body {
     font-style: italic;
     font-size: 1.3rem;
     color: #d63384;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 10px 20px;
-    border-radius: 12px; /* Menos redondeado, más elegante */
+    background: rgba(255, 255, 255, 0.95);
+    padding: 12px 22px;
+    border-radius: 15px; /* Elegante, no circular */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     text-align: center;
+    z-index: 7000; /* Asegura que estén al frente de todo */
     animation: bubbleFade 8s ease-in-out forwards;
 }
 
