@@ -18,7 +18,6 @@ body {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background-color: black;
     z-index: 1;
 }
 
@@ -34,7 +33,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover; /* Este llena toda la pantalla */
-    filter: blur(20px) brightness(0.5); /* Desenfoque intenso */
+    filter: blur(25px) brightness(0.4); /* Desenfoque intenso */
     z-index: 1;
 }
 
@@ -42,18 +41,17 @@ body {
     position: relative; 
     z-index: 2;
     /* ESTO asegura que la foto se vea en su tamaño natural sin estirarse */
-    max-width: 95%; 
-    max-height: 85%;
+    max-width: 100%; 
+    max-height: 100%;
     object-fit: contain; 
-    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    box-shadow: 0 0 40px rgba(0,0,0,0.8);
 }
 
 .message {
     position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    z-index: 5000; background: rgba(255, 255, 255, 0.7);
-    padding: 20px 40px; border-radius: 50px;
-    color: #d63384; font-weight: bold; font-family: Arial, sans-serif;
-    font-size: clamp(1.5rem, 6vw, 2.8rem); text-align: center;
+    z-index: 8000; background: rgba(255, 255, 255, 0.8);
+    padding: 15px 30px; border-radius: 50px;
+    color: #d63384; font-weight: bold; font-size: clamp(1.5rem, 6vw, 2.8rem); text-align: center;
     animation: bounce 2s infinite ease-in-out; pointer-events: none;
 }
 
@@ -69,7 +67,7 @@ body {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    z-index: 6000;
+    z-index: 9999;
     pointer-events: none;
 }
 
@@ -77,22 +75,22 @@ body {
     position: absolute;
     font-family: 'Great Vibes', cursive;
     font-style: italic;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     color: #d63384;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 12px 22px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 12px 20px;
     border-radius: 15px; /* Elegante, no circular */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     text-align: center;
     z-index: 7000; /* Asegura que estén al frente de todo */
-    animation: bubbleFade 8s ease-in-out forwards;
+    animation: bubbleFade 9s ease-in-out forwards;
 }
 
 @keyframes bubbleFade {
-    0% { opacity: 0; transform: translateY(20px); }
-    15% { opacity: 1; transform: translateY(0); }
-    85% { opacity: 1; }
-    100% { opacity: 0; transform: translateY(-30px); }
+    0% { opacity: 0; transform: translateY(30px) scale(0.9); }
+    10% { opacity: 1; transform: translateY(0) scale(1); }
+    90% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-40px) scale(0.9); }
 }
 
 /* 5. LOGIN Y CORAZÓN */
