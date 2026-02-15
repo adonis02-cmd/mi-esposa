@@ -1,4 +1,5 @@
 const secretWord = "JreBaap1722";
+const secretName = "Jermelyn";
 const youtubeID = "f_C83707pY4";
 
 let player;
@@ -24,37 +25,41 @@ function onYouTubeIframeAPIReady() {
         }
     });
 }
-
+ 
 function checkPassword() {
     const input = document.getElementById("password-input").value;
-    if (input === secretWord) {
-        document.getElementById("step-1").style.display = "none";
-        document.getElementById("step-2").style.display = "block"; 
-    
-    if (input === secretWord) {
-    	if (player) {
-        	player.unMute();
-        	player.setVolume(100);
-        	player.playVideo();
-    	}
+    const step1 = document.getElementById("step-1");
+    const step2 = document.getElementById("step-2");
+    const errorMsg = document.getElementById("error-msg");
 
-        loginScreen.style.opacity = "0";
-        setTimeout(() => {
-            loginScreen.style.display = "none";
-            mainContent.style.display = "block";
-            iniciarRegalo();
-        }, 500);
+    if (input === secretWord) {
+        step1.style.display = "none";
+        step2.style.display = "block";
+        errorMsg.style.display = "none";
+        console.log("Contraseña correcta, pasando al nombre...");
+        
+       
+        if (typeof player !== 'undefined' && player) {
+            player.unMute();
+            player.playVideo();
+            player.setVolume(0); 
+        }
     } else {
-        document.getElementById("error-msg").style.display = "block";
+        errorMsg.style.display = "block";
+        console.log("Contraseña incorrecta");
     }
 }
 
 function checkName() {
     const nameInput = document.getElementById("name-input").value.trim();
-    if (nameInput.toLowerCase() === "jermelyn") {
-        showHeart();
+    
+    if (nameInput.toLowerCase() === secretName.toLowerCase()) {
+        if (typeof player !== 'undefined' && player) {
+            player.setVolume(100);
+        }
+        showHeart(); 
     } else {
-        alert("Please enter your name correctly, my love.");
+        alert("That is not the name of my queen... Please try again.");
     }
 }
 
