@@ -56,10 +56,11 @@ body {
 }
 
 .message {
+    font-family: 'Gives Vibes', cursive;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 5000; /* Lo pone por encima de las fotos */
+    text-align: center;
     background: rgba(255, 255, 255, 0.8);
     padding: 25px;
     border-radius: 15px;
@@ -67,10 +68,9 @@ body {
     font-size: 28px;
     color: #d63384;
     font-weight: bold;
-    text-align: center;
+    margin-bottom: 25px;
     transition: transform 0.3s ease;
-    animation: bounce 1s infinite; /* Aquí recupera el movimiento */
-    pointer-events: none; /* Evita que estorbe al hacer clic */
+    animation: bounce 1s infinite;
 }
 
 .message:hover {
@@ -110,20 +110,16 @@ body {
 .text-bubble {
     position: absolute;
     /* Tamaño más grande y color rosa fuerte como el principal */
-    font-size: 1.6rem; 
+    font-size: 1.2rem; 
     font-family: 'Great Vibes', cursive;
-    font-style: italic;
     color: #d63384; 
-    
-    padding: 15px 25px;
+    padding: 10px 15px;
     border-radius: 20px;
     background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 4px 15px rgba(214, 51, 132, 0.3);
-    
-    /* Cambiamos la animación a bubbleFade que es la que configuramos antes */
-    animation: bubbleFade 8s ease-in-out forwards; 
-    
+    box-shadow: 0 4px 15px rgba(214, 51, 132, 0.2);
+    animation: floatText 8s ease-in-out forwards;  
     white-space: normal;
+    max-width: 250px;
     text-align: center;
 }
 
