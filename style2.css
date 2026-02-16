@@ -3,13 +3,20 @@
 }
 
 body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     margin: 0;
     padding: 0;
-    height: 100vh;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
     background-color: black;
     overflow: hidden;
     position: relative; /* Importante para que los hijos absolutos se ubiquen bien */
-    font-family: Arial, sans-serif;
 }
 
 #main-content { display: none; width: 100%; height: 100%; }
@@ -51,8 +58,6 @@ body {
 
 .message {
     position: fixed;
-    top: 50%;
-    left: 50%;
     transform: translate(-50%, -50%); /* Lo centra exactamente en el medio */
     background: rgba(255, 255, 255, 0.85); /* Un poco más de blanco para que resalte */
     padding: 30px;
