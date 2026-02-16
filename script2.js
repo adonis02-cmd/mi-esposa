@@ -32,15 +32,17 @@ function checkPassword() {
     if (input === secretWord) {
         document.getElementById("step-1").style.display = "none";
         document.getElementById("step-2").style.display = "block";
-        if (player) {
-            player.unMute();
-            player.playVideo();
-        }
+        // Intentar reproducir video sin bloquear el flujo
+        try {
+            if (player && isPlayerReady) {
+                player.unMute();
+                player.playVideo();
+            }
+        } catch(e) { console.log("YouTube blocked auto-play"); }
     } else {
         document.getElementById("error-msg").style.display = "block";
     }
 }
-
 function checkName() {
     const nameInput = document.getElementById("name-input").value.trim();
     if (nameInput.toLowerCase() === secretName.toLowerCase()) {
