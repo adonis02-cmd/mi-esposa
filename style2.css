@@ -56,6 +56,11 @@ body {
 }
 
 .message {
+    position: fixed; /* Asegura que se quede en un solo sitio */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5000; /* Lo pone por encima de las fotos */
     background: rgba(255, 255, 255, 0.8);
     padding: 25px;
     border-radius: 15px;
@@ -63,9 +68,10 @@ body {
     font-size: 28px;
     color: #d63384;
     font-weight: bold;
-    margin-bottom: 25px;
+    text-align: center;
     transition: transform 0.3s ease;
-    animation: bounce 1s infinite;
+    animation: bounce 1s infinite; /* Aquí recupera el movimiento */
+    pointer-events: none; /* Evita que estorbe al hacer clic */
 }
 
 .message:hover {
@@ -104,17 +110,24 @@ body {
 
 .text-bubble {
     position: absolute;
-    font-size: 1rem;
+    /* Tamaño más grande y color rosa fuerte como el principal */
+    font-size: 1.6rem; 
     font-family: 'Great Vibes', cursive;
-    color: #d63384;
-    padding: 10px 15px;
+    font-style: italic;
+    color: #d63384; 
+    
+    padding: 15px 25px;
     border-radius: 20px;
-    background-color: rgba(255, 255, 255, 0.85);
-    box-shadow: 0 4px 10px rgba(214, 51, 132, 0.2);
-    animation: floatText 8s ease-in-out forwards;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 15px rgba(214, 51, 132, 0.3);
+    
+    /* Cambiamos la animación a bubbleFade que es la que configuramos antes */
+    animation: bubbleFade 8s ease-in-out forwards; 
+    
     white-space: normal;
-    max-width: 250px;
+    max-width: 300px;
     text-align: center;
+    z-index: 99999; /* La capa más alta de todas */
 }
 
 @keyframes bubbleFade {
