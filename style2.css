@@ -93,30 +93,29 @@ body {
 }
 
 #bubbles-text {
-    position: fixed; /* Cambiado de absolute a fixed */
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 999999; /* La capa más alta de todas */
+    position: absolute;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
 }
 
 .text-bubble {
     position: absolute;
-    font-family: 'Great Vibes', cursive;
-    font-style: italic;
-    font-size: 1.6rem; /* Texto más grande */
-    color: #d63384; /* Rosa como el principal */
-    background: rgba(255, 255, 255, 0.95);
-    padding: 15px 25px;
+    font-size: 1rem;
+    font-family: 'Segoe Script', 'Comic Sans MS', cursive;
+    color: #d63384;
+    padding: 10px 15px;
     border-radius: 20px;
-    box-shadow: 0 5px 15px rgba(214, 51, 132, 0.3);
+    background-color: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 4px 10px rgba(214, 51, 132, 0.2);
+    animation: floatText 8s ease-in-out forwards;
+    white-space: normal;
+    max-width: 250px;
     text-align: center;
-    max-width: 280px;
-    /* Usamos la animación que definimos antes */
-    animation: bubbleFade 8s ease-in-out forwards; 
 }
+
 @keyframes bubbleFade {
     0% { opacity: 0; transform: translateY(30px) scale(0.9); }
     10% { opacity: 1; transform: translateY(0) scale(1); }
