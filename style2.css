@@ -1,7 +1,5 @@
 {
-
     box-sizing: border-box;
-
 }
 
 body {
@@ -89,28 +87,43 @@ body {
 
 
 .message {
-    position: fixed; /* Esto lo ancla a la pantalla */
+    position: fixed; 
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Centrado matemático absoluto */
-    z-index: 1000; /* Por encima de las fotos */
+    /* El transform inicial debe ser este para estar centrado */
+    transform: translate(-50%, -50%); 
+    z-index: 9999; /* Asegura que esté por encima de las fotos y burbujas */
     background: rgba(255, 255, 255, 0.9);
     padding: 20px 40px;
-    border-radius: 20px;
+    border-radius: 50px; /* Más redondeado para parecer burbuja */
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
-    font-size: clamp(24px, 5vw, 35px);
+    font-size: clamp(24px, 5vw, 40px);
     color: #d63384;
     font-weight: bold;
     text-align: center;
-    animation: bounce 1.5s infinite ease-in-out;
+    border: 3px solid #ff99b6;
+    
+    /* Aplicamos la animación de rebote suave */
+    animation: bounce-center 3s infinite ease-in-out;
+    
     pointer-events: none;
     min-width: 300px;
+    white-space: nowrap;
 }
 
 .message:hover {
 
     transform: scale(1.1);
 
+}
+
+@keyframes bounce-center {
+    0%, 100% { 
+        transform: translate(-50%, -50%); 
+    }
+    50% { 
+        transform: translate(-50%, -60%); /* Sube un poco */
+    }
 }
 
 @keyframes heartbeat { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.1); } }
