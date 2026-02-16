@@ -4,17 +4,11 @@
 
 body {
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     padding: 0;
     height: 100vh;
-    background-size: cover;
-    background-attachment: fixed;
-    text-align: center;
+    background-color: black;
     overflow: hidden;
-    position: relative;
+    position: relative; /* Importante para que los hijos absolutos se ubiquen bien */
     font-family: Arial, sans-serif;
 }
 
@@ -56,21 +50,21 @@ body {
 }
 
 .message {
-    font-family: 'Gives Vibes', cursive;
+    position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    background: rgba(255, 255, 255, 0.8);
-    padding: 25px;
+    transform: translate(-50%, -50%); /* Lo centra exactamente en el medio */
+    z-index: 80000; /* Por encima de las fotos */
+    background: rgba(255, 255, 255, 0.85); /* Un poco más de blanco para que resalte */
+    padding: 20px 40px;
     border-radius: 15px;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
-    font-size: 28px;
-    color: #d63384;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+    font-size: clamp(22px, 5vw, 32px); /* Tamaño grande y adaptable */
+    color: #d63384; /* El rosa fuerte que querías */
     font-weight: bold;
-    margin-bottom: 25px;
-    transition: transform 0.3s ease;
-    animation: bounce 1s infinite;
+    text-align: center;
+    animation: bounce 1.5s infinite ease-in-out; /* Tu animación de salto */
+    pointer-events: none;
 }
 
 .message:hover {
@@ -99,30 +93,30 @@ body {
 }
 
 #bubbles-text {
-    position: absolute;
-    width: 100%;
-    height: 100%;
+    position: fixed; /* Cambiado de absolute a fixed */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1; /* La capa más alta de todas */
     pointer-events: none;
-    overflow: hidden;
-    z-index: 1;
 }
 
 .text-bubble {
     position: absolute;
-    /* Tamaño más grande y color rosa fuerte como el principal */
-    font-size: 1.2rem; 
     font-family: 'Great Vibes', cursive;
-    color: #d63384; 
-    padding: 10px 15px;
+    font-style: italic;
+    font-size: 1.6rem; /* Texto más grande */
+    color: #d63384; /* Rosa como el principal */
+    background: rgba(255, 255, 255, 0.95);
+    padding: 15px 25px;
     border-radius: 20px;
-    background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 4px 15px rgba(214, 51, 132, 0.2);
-    animation: floatText 8s ease-in-out forwards;  
-    white-space: normal;
-    max-width: 250px;
+    box-shadow: 0 5px 15px rgba(214, 51, 132, 0.3);
     text-align: center;
+    max-width: 280px;
+    /* Usamos la animación que definimos antes */
+    animation: bubbleFade 8s ease-in-out forwards; 
 }
-
 @keyframes bubbleFade {
     0% { opacity: 0; transform: translateY(30px) scale(0.9); }
     10% { opacity: 1; transform: translateY(0) scale(1); }
