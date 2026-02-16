@@ -115,16 +115,21 @@ body {
 
 
 .message {
-    background: rgba(255, 255, 255, 0.8);
-    padding: 25px;
+    position: fixed; /* Cambiado a fixed para que no dependa del flex del body */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Esto lo pone en el centro exacto siempre */
+    z-index: 100; /* Por encima de las fotos (que tienen z-index 1 y 2) */
+    background: rgba(255, 255, 255, 0.9); /* Más sólido para que se lea mejor */
+    padding: 20px 40px;
     border-radius: 15px;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); 
-    font-size: 28px;
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.3); 
+    font-size: clamp(24px, 5vw, 36px); /* Tamaño grande y responsivo */
     color: #d63384;
     font-weight: bold;
-    margin-bottom: 25px;
-    transition: transform 0.3s ease;
-    animation: bounce 1s infinite;
+    text-align: center;
+    animation: bounce 1.5s infinite ease-in-out;
+    pointer-events: none; /* Para que no estorbe si haces clic */
 }
 
 
@@ -133,18 +138,6 @@ body {
     transform: scale(1.1);
 
 }
-
-
-
-@keyframes bounce {
-
-    0%, 100% { transform: translate(-50%, -50%); }
-
-    50% { transform: translate(-50%, -60%); }
-
-}
-
-
 
 @keyframes heartbeat { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.1); } }
 
@@ -169,45 +162,44 @@ body {
 
 }
 
-
-
 #bubbles-text {
-    position: absolute;
-    width: 100%;
-    height: 100%;
+    position: fixed; /* Cambiado a fixed para que cubra toda la pantalla */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     pointer-events: none;
     overflow: hidden;
-    z-index: 1;
+    z-index: 9999; /* LA CAPA MÁS ALTA: Por encima de todo */
 }
 
 .text-bubble {
     position: absolute;
-    font-size: 1rem;
+    font-size: 1.3rem; /* Texto más grande */
     font-family: 'Segoe Script', 'Comic Sans MS', cursive;
-    color: #d63384;
-    padding: 10px 15px;
+    color: #d63384; /* Rosa fuerte */
+    padding: 15px 20px;
     border-radius: 20px;
-    background-color: rgba(255, 255, 255, 0.85);
-    box-shadow: 0 4px 10px rgba(214, 51, 132, 0.2);
-    animation: floatText 8s ease-in-out forwards;
+    background-color: rgba(255, 255, 255, 0.95); /* Fondo casi blanco para legibilidad */
+    box-shadow: 0 5px 15px rgba(214, 51, 132, 0.3);
+    /* Usamos bubbleFade que es la animación que tienes definida abajo */
+    animation: bubbleFade 8.5s ease-in-out forwards; 
     white-space: normal;
-    max-width: 250px;
+    max-width: 280px;
     text-align: center;
 }
 
-@keyframes bubbleFade {
-
-    0% { opacity: 0; transform: translateY(30px) scale(0.9); }
-
-    10% { opacity: 1; transform: translateY(0) scale(1); }
-
-    90% { opacity: 1; }
-
-    100% { opacity: 0; transform: translateY(-40px) scale(0.9); }
-
+@keyframes bounce {
+    0%, 100% { transform: translate(-50%, -50%); }
+    50% { transform: translate(-50%, -60%); } /* Sube y baja en el centro */
 }
 
-
+@keyframes bubbleFade {
+    0% { opacity: 0; transform: translateY(30px) scale(0.8); }
+    10% { opacity: 1; transform: translateY(0) scale(1); }
+    90% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-50px) scale(0.8); }
+}
 
 /* 5. LOGIN Y CORAZÓN */
 

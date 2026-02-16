@@ -94,25 +94,6 @@ const messages = [
     "You are the most beautiful thing that has ever happened to me. I love you!❤️❤️"
 ];
 
-function createTextBubble() {
-    const container = document.getElementById("bubbles-text");
-    if (!container) return;
-
-    const bubble = document.createElement("div");
-    bubble.className = "text-bubble";
-    bubble.innerText = messages[Math.floor(Math.random() * messages.length)];
-    
-    // Posición aleatoria
-    bubble.style.left = (Math.random() * 60 + 10) + "vw";
-    bubble.style.top = (Math.random() * 60 + 15) + "vh";
-
-    container.appendChild(bubble);
-
-    setTimeout(() => {
-        bubble.remove();
-    }, 8500);
-}
-
 const misFotos = [
     '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg',
     '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '17.jpg', '18.jpg', '19.jpg', '20.jpg',
@@ -148,15 +129,19 @@ function createTextBubble() {
     const bubble = document.createElement("div");
     bubble.className = "text-bubble";
     
-    // Posiciones aleatorias esparcidas (lejos de los bordes para que no se corten)
-    const randomX = Math.floor(Math.random() * 65) + 5; // de 5% a 70%
-    const randomY = Math.floor(Math.random() * 75) + 10; // de 10% a 85%
+    // Elegir mensaje aleatorio de tu lista
+    bubble.innerText = messages[Math.floor(Math.random() * messages.length)];
+    
+    // Posiciones aleatorias esparcidas
+    const randomX = Math.floor(Math.random() * 60) + 10; // de 10% a 70%
+    const randomY = Math.floor(Math.random() * 70) + 15; // de 15% a 85%
 
     bubble.style.left = randomX + "vw";
     bubble.style.top = randomY + "vh";
 
     container.appendChild(bubble);
 
+    // Se elimina sola después de la animación
     setTimeout(() => {
         bubble.remove();
     }, 8500);
