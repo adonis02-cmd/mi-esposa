@@ -54,17 +54,16 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); /* Lo centra exactamente en el medio */
-    z-index: 80000; /* Por encima de las fotos */
     background: rgba(255, 255, 255, 0.85); /* Un poco más de blanco para que resalte */
-    padding: 20px 40px;
+    padding: 30px;
     border-radius: 15px;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
     font-size: clamp(22px, 5vw, 32px); /* Tamaño grande y adaptable */
     color: #d63384; /* El rosa fuerte que querías */
     font-weight: bold;
-    text-align: center;
-    animation: bounce 1.5s infinite ease-in-out; /* Tu animación de salto */
-    pointer-events: none;
+    margin-bottom: 25px;
+    transition: transform 0.3s ease;
+    animation: bounce 1s infinite;
 }
 
 .message:hover {
