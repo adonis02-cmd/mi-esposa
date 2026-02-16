@@ -56,7 +56,6 @@ body {
 }
 
 .message {
-    position: fixed; /* Asegura que se quede en un solo sitio */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -125,9 +124,7 @@ body {
     animation: bubbleFade 8s ease-in-out forwards; 
     
     white-space: normal;
-    max-width: 300px;
     text-align: center;
-    z-index: 99999; /* La capa más alta de todas */
 }
 
 @keyframes bubbleFade {
