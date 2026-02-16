@@ -89,7 +89,7 @@ const messages = [
     "You attract me with a force greater than Earth✨",
     "You are my eternal law of attraction; I would gladly fall toward the only center of gravity that gives my life meaning: Jermelyn🥺❤️",
     "So few planets for the universe you make me feel✨",
-    "I didn't believe in soulmates until you became mine❤️"
+    "I didn't believe in soulmates until you became mine❤️",
     "Thank you for simply being by my side❤️",
     "We wandered without aim, yet all the while, our hearts knew we were walking to find one another💞",
     "In a single kiss, you will know all that I have left unsaid🤫❤️",
