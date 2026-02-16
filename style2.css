@@ -252,7 +252,9 @@ body {
 
 }
 
-
+#login-screen, .login-card, input, button {
+    pointer-events: auto !important;
+}
 
 @keyframes fadeIn {
 
@@ -262,6 +264,19 @@ body {
 
 }
 
+button {
+    cursor: pointer;
+    background-color: #d63384;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 15px;
+    transition: transform 0.2s;
+}
+
+button:active {
+    transform: scale(0.95);
+}
 
 
 #heart-container {
