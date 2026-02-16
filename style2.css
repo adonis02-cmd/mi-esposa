@@ -4,41 +4,15 @@
 
 }
 
-
-
 body {
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    align-items: center;
-
-    height: 100vh;
-
     margin: 0;
-
     padding: 0;
-
-    background-size: cover;
-
-    background-attachment: fixed;
-
-    font-family: 'Arial', sans-serif;
-
-    text-align: center;
-
+    height: 100vh;
     background-color: black;
-
     overflow: hidden;
-
-    position: relative; /* Importante para que los hijos absolutos se ubiquen bien */
-
+    position: relative;
+    font-family: 'Arial', sans-serif;
 }
-
-
 
 #main-content { display: none; width: 100%; height: 100%; }
 
@@ -115,23 +89,23 @@ body {
 
 
 .message {
-    position: fixed; /* Cambiado a fixed para que no dependa del flex del body */
+    position: fixed; /* Esto lo ancla a la pantalla */
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Esto lo pone en el centro exacto siempre */
-    z-index: 100; /* Por encima de las fotos (que tienen z-index 1 y 2) */
-    background: rgba(255, 255, 255, 0.9); /* Más sólido para que se lea mejor */
+    transform: translate(-50%, -50%); /* Centrado matemático absoluto */
+    z-index: 1000; /* Por encima de las fotos */
+    background: rgba(255, 255, 255, 0.9);
     padding: 20px 40px;
-    border-radius: 15px;
-    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.3); 
-    font-size: clamp(24px, 5vw, 36px); /* Tamaño grande y responsivo */
+    border-radius: 20px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+    font-size: clamp(24px, 5vw, 35px);
     color: #d63384;
     font-weight: bold;
     text-align: center;
     animation: bounce 1.5s infinite ease-in-out;
-    pointer-events: none; /* Para que no estorbe si haces clic */
+    pointer-events: none;
+    min-width: 300px;
 }
-
 
 .message:hover {
 
@@ -163,30 +137,28 @@ body {
 }
 
 #bubbles-text {
-    position: fixed; /* Cambiado a fixed para que cubra toda la pantalla */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
+    z-index: 9999; /* La capa más alta de todas */
     pointer-events: none;
-    overflow: hidden;
-    z-index: 9999; /* LA CAPA MÁS ALTA: Por encima de todo */
 }
 
 .text-bubble {
     position: absolute;
-    font-size: 1.3rem; /* Texto más grande */
+    font-size: 1.4rem; /* Texto grande como pediste */
     font-family: 'Segoe Script', 'Comic Sans MS', cursive;
-    color: #d63384; /* Rosa fuerte */
-    padding: 15px 20px;
-    border-radius: 20px;
-    background-color: rgba(255, 255, 255, 0.95); /* Fondo casi blanco para legibilidad */
-    box-shadow: 0 5px 15px rgba(214, 51, 132, 0.3);
-    /* Usamos bubbleFade que es la animación que tienes definida abajo */
-    animation: bubbleFade 8.5s ease-in-out forwards; 
-    white-space: normal;
-    max-width: 280px;
+    color: #d63384;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 15px 25px;
+    border-radius: 25px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     text-align: center;
+    max-width: 300px;
+    /* Usamos bubbleFade que es la animación que tienes definida */
+    animation: bubbleFade 8s ease-in-out forwards;
 }
 
 @keyframes bounce {

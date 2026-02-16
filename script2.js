@@ -129,22 +129,23 @@ function createTextBubble() {
     const bubble = document.createElement("div");
     bubble.className = "text-bubble";
     
-    // Elegir mensaje aleatorio de tu lista
+    // Elegimos el mensaje de la lista
     bubble.innerText = messages[Math.floor(Math.random() * messages.length)];
     
-    // Posiciones aleatorias esparcidas
-    const randomX = Math.floor(Math.random() * 60) + 10; // de 10% a 70%
-    const randomY = Math.floor(Math.random() * 70) + 15; // de 15% a 85%
+    // Posiciones aleatorias esparcidas por la pantalla
+    // Usamos porcentajes para que siempre se vean en el área visible
+    const randomX = Math.floor(Math.random() * 60) + 5; // Entre 5% y 65% del ancho
+    const randomY = Math.floor(Math.random() * 70) + 10; // Entre 10% y 80% del alto
 
     bubble.style.left = randomX + "vw";
     bubble.style.top = randomY + "vh";
 
     container.appendChild(bubble);
 
-    // Se elimina sola después de la animación
+    // Se elimina después de que termine la animación de 8 segundos
     setTimeout(() => {
         bubble.remove();
-    }, 8500);
+    }, 8000);
 }
 
 function cambiarImagen() {
