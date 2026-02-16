@@ -1,207 +1,419 @@
 {
+
     box-sizing: border-box;
+
 }
 
+
+
 body {
-    margin: 0;
-    padding: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
     height: 100vh;
+
+    margin: 0;
+
+    padding: 0;
+
+    background-size: cover;
+
+    background-attachment: fixed;
+
+    font-family: 'Arial', sans-serif;
+
+    text-align: center;
+
     background-color: black;
+
     overflow: hidden;
+
     position: relative; /* Importante para que los hijos absolutos se ubiquen bien */
-    font-family: Arial, sans-serif;
+
 }
+
+
 
 #main-content { display: none; width: 100%; height: 100%; }
 
+
+
 #galeria {
+
     position: fixed;
+
     top: 0; left: 0;
+
     width: 100%; height: 100%;
+
     z-index: 1;
+
 }
+
+
 
 .foto-wrapper {
+
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+
     opacity: 0; transition: opacity 2s ease-in-out;
+
     display: flex; justify-content: center; align-items: center;
+
 }
+
 .foto-wrapper.active { opacity: 1; }
 
+
+
 .bg-desenfocado {
+
     position: absolute;
+
     width: 100%;
+
     height: 100%;
+
     object-fit: cover; /* Este llena toda la pantalla */
+
     filter: blur(25px) brightness(0.4); /* Desenfoque intenso */
+
     z-index: 1;
+
 }
+
+
 
 .img-central {
+
     position: relative; 
+
     z-index: 2;
+
     /* ESTO asegura que la foto se vea en su tamaño natural sin estirarse */
+
     width: auto;
+
     height: 100vh;
+
     max-width: 100%; 
+
     max-height: 100%;
+
     object-fit: contain; 
+
     box-shadow: 0 0 60px rgba(0,0,0,0.9);
+
 }
+
+
 
 .message {
+
     position: fixed;
-    top: 50%;
-    left: 50%;
+
     transform: translate(-50%, -50%); /* Lo centra exactamente en el medio */
-    z-index: 80000; /* Por encima de las fotos */
+
     background: rgba(255, 255, 255, 0.85); /* Un poco más de blanco para que resalte */
-    padding: 20px 40px;
+
+    padding: 30px;
+
     border-radius: 15px;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+
     font-size: clamp(22px, 5vw, 32px); /* Tamaño grande y adaptable */
+
     color: #d63384; /* El rosa fuerte que querías */
+
     font-weight: bold;
-    text-align: center;
-    animation: bounce 1.5s infinite ease-in-out; /* Tu animación de salto */
-    pointer-events: none;
+
+    margin-bottom: 25px;
+
+    transition: transform 0.3s ease;
+
+    animation: bounce 1s infinite;
+
 }
+
+
 
 .message:hover {
+
     transform: scale(1.1);
+
 }
 
+
+
 @keyframes bounce {
+
     0%, 100% { transform: translate(-50%, -50%); }
+
     50% { transform: translate(-50%, -60%); }
+
 }
+
+
 
 @keyframes heartbeat { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.1); } }
 
+
+
 .bubbles {
+
     position: absolute;
+
     bottom: 10px;
+
     font-size: 25px;
+
     color: #ff99b6;
+
     animation: bubbleAnimation 7s ease-in-out infinite;
+
 }
+
+
 
 @keyframes bubbleAnimation {
+
     0% { transform: translateY(0) scale(1); opacity: 0.8; }
+
     50% { transform: translateY(-100px) scale(1.3); opacity: 0.4; }
+
     100% { transform: translateY(0) scale(1); opacity: 0.8; }
+
 }
+
+
 
 #bubbles-text {
-    position: fixed; /* Cambiado de absolute a fixed */
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 999999; /* La capa más alta de todas */
+
+    position: absolute;
+
+    width: 100%;
+
+    height: 100%;
+
     pointer-events: none;
+
+    overflow: hidden;
+
+    z-index: 1;
+
 }
+
+
 
 .text-bubble {
+
     position: absolute;
-    font-family: 'Great Vibes', cursive;
-    font-style: italic;
-    font-size: 1.6rem; /* Texto más grande */
-    color: #d63384; /* Rosa como el principal */
-    background: rgba(255, 255, 255, 0.95);
-    padding: 15px 25px;
+
+    font-size: 1rem;
+
+    font-family: 'Segoe Script', 'Comic Sans MS', cursive;
+
+    color: #d63384;
+
+    padding: 10px 15px;
+
     border-radius: 20px;
-    box-shadow: 0 5px 15px rgba(214, 51, 132, 0.3);
+
+    background-color: rgba(255, 255, 255, 0.85);
+
+    box-shadow: 0 4px 10px rgba(214, 51, 132, 0.2);
+
+    animation: floatText 8s ease-in-out forwards;
+
+    white-space: normal;
+
+    max-width: 250px;
+
     text-align: center;
-    max-width: 280px;
-    /* Usamos la animación que definimos antes */
-    animation: bubbleFade 8s ease-in-out forwards; 
+
 }
+
+
+
 @keyframes bubbleFade {
+
     0% { opacity: 0; transform: translateY(30px) scale(0.9); }
+
     10% { opacity: 1; transform: translateY(0) scale(1); }
+
     90% { opacity: 1; }
+
     100% { opacity: 0; transform: translateY(-40px) scale(0.9); }
+
 }
+
+
 
 /* 5. LOGIN Y CORAZÓN */
+
 #login-screen {
+
     position: fixed;
+
     top: 0; left: 0;
+
     width: 100%; height: 100%;
+
     display: flex;
+
     justify-content: center;
+
     align-items: center;
+
     z-index: 10000;
+
     background-image: url('1.jpg');
+
     background-size: cover;
+
     background-position: center;
+
 }
+
+
 
 #login-screen::before {
+
     content: "";
+
     position: absolute;
+
     top: 0; left: 0;
+
     width: 100%; height: 100%;
+
     background: rgba(0, 0, 0, 0.4);
+
     backdrop-filter: blur(8px);
+
     z-index: -1;
+
 }
+
+
 
 .login-card {
+
     background: rgba(255, 255, 255, 0.95);
+
     padding: 35px;
+
     border-radius: 25px;
+
     border: 3px solid #ff85a2;
+
     text-align: center;
+
     max-width: 380px;
+
     width: 85%;
+
 }
+
+
 
 @keyframes fadeIn {
+
     from { opacity: 0; transform: scale(0.8); }
+
     to { opacity: 1; transform: scale(1); }
+
 }
+
+
 
 #heart-container {
+
     position: fixed; 
+
     top: 0; left: 0; 
+
     width: 100%; height: 100%;
+
     background-image: url('30.jpg'); 
+
     background-size: cover; 
+
     background-position: center;
+
     display: none; 
+
     z-index: 9000;
+
 }
+
 .heart-text {
+
     position: absolute; color: #ff4d4d; font-weight: bold; font-size: 13px;
+
     transform: translate(-50%, -50%); animation: heartbeat 1.5s infinite;
+
     text-shadow: 0 0 5px black;
+
 }
+
+
 
 @media (max-width: 768px) {
+
     body {
+
         background-size: 100% 100%;
+
         background-position: center top;
+
     }
 
+
+
     .message { font-size: 24px; padding: 20px; }
+
     .charming-text {font-size: 16px; padding: 8px 16px; }
+
     .flowers { font-size: 25px; }
+
     .bubbles { font-size: 20px; }
+
 }
 
+
+
 .charming-text {
+
     position: absolute;
+
     font-size: 18px;
+
     font-family: 'cursive', sans-serif;
+
     color: #d63384;
+
     animation: fadeInText 6s ease-in-out infinite;
+
     z-index: 1;
+
     padding: 10px 20px;
+
     border-radius: 25px;
+
     background-color: rgba(255, 255, 255, 0.7);
+
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
     max-width: 80vw;
+
     word-wrap: break-word;
+
 }
