@@ -8,7 +8,7 @@
 
 body {
 
-    display: flex;
+    display: absolute;
 
     flex-direction: column;
 
@@ -116,7 +116,7 @@ body {
 
 .message {
 
-    position: fixed;
+    position: absolute;
 
     transform: translate(-50%, -50%); /* Lo centra exactamente en el medio */
 
@@ -218,7 +218,7 @@ body {
 
     font-size: 1rem;
 
-    font-family: 'Segoe Script', 'Comic Sans MS', cursive;
+    font-family: 'Given Vibes', cursive;
 
     color: #d63384;
 
@@ -230,7 +230,7 @@ body {
 
     box-shadow: 0 4px 10px rgba(214, 51, 132, 0.2);
 
-    animation: floatText 8s ease-in-out forwards;
+    animation: bubbleFade 8s ease-in-out forwards;
 
     white-space: normal;
 
