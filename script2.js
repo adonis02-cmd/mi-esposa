@@ -148,10 +148,6 @@ function createTextBubble() {
     const bubble = document.createElement("div");
     bubble.className = "text-bubble";
     
-    // Añadimos un corazoncito al final de cada frase automáticamente
-    const randomMsg = messages[Math.floor(Math.random() * messages.length)];
-    bubble.innerText = randomMsg + " ❤️";
-    
     // Posiciones aleatorias esparcidas (lejos de los bordes para que no se corten)
     const randomX = Math.floor(Math.random() * 65) + 5; // de 5% a 70%
     const randomY = Math.floor(Math.random() * 75) + 10; // de 10% a 85%
