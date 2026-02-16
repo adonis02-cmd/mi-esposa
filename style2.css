@@ -3,20 +3,13 @@
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     margin: 0;
     padding: 0;
-    background-size: cover;
-    background-attachment: fixed;
-    font-family: 'Arial', sans-serif;
-    text-align: center;
+    height: 100vh;
     background-color: black;
     overflow: hidden;
     position: relative; /* Importante para que los hijos absolutos se ubiquen bien */
+    font-family: Arial, sans-serif;
 }
 
 #main-content { display: none; width: 100%; height: 100%; }
@@ -97,11 +90,9 @@ body {
 }
 
 #bubbles-text {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    position: absolute;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
     overflow: hidden;
     z-index: 1;
@@ -109,16 +100,16 @@ body {
 
 .text-bubble {
     position: absolute;
-    font-size: 1.4rem;
+    font-size: 1rem;
     font-family: 'Segoe Script', 'Comic Sans MS', cursive;
     color: #d63384;
-    padding: 15px 20px;
+    padding: 10px 15px;
     border-radius: 20px;
-    background-color: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 4px 10px rgba(214, 51, 132, 0.2);
     animation: bubbleFade 8s ease-in-out forwards;
     white-space: normal;
-    max-width: 300px;
+    max-width: 250px;
     text-align: center;
 }
 
