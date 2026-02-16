@@ -71,13 +71,14 @@ function showHeart() {
     }
 
     setTimeout(() => {
-        container.style.transition = "opacity 2s";
-        container.style.opacity = "0";
-        setTimeout(() => {
-            container.style.display = "none";
-            document.getElementById("main-content").style.display = "block";
-            iniciarRegalo();
-        }, 2000);
+    	container.style.transition = "opacity 2s";
+    	container.style.opacity = "0";
+    	setTimeout(() => {
+        	container.style.display = "none";
+        	// IMPORTANTE: Primero mostramos el contenido, luego iniciamos la galería
+        	document.getElementById("main-content").style.display = "block"; 
+        	iniciarRegalo(); 
+    	}, 2000);
     }, 6000);
 }
 
