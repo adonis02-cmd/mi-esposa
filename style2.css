@@ -8,7 +8,7 @@
 
 body {
 
-    display: absolute;
+    display: flex;
 
     flex-direction: column;
 
